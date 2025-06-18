@@ -12,5 +12,4 @@ requests
 sounddevice
 httpx
 pydantic
-pyaudio
 typing-inspection
