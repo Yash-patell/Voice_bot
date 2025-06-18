@@ -14,7 +14,6 @@ from streamlit_mic_recorder import mic_recorder
 # with tempfile.NamedTemporaryFile(delete=False, suffix=".json") as f:
 #     f.write(st.secrets["GOOGLE_TTS_JSON"].encode())
 #     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = f.name
-
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "gen-lang-client-0664909927-d9606abce1f5.json"
 # --- Text-to-Speech with Google Cloud ---
 def speak_text_google(text):
