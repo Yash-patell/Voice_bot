@@ -3,6 +3,7 @@ speechrecognition
 google-generativeai
 google-genai
 google-cloud-texttospeech
+streamlit-mic-recorder
 google-ai-generativelanguage
 numpy
 pandas

@@ -5,6 +5,9 @@ from io import BytesIO
 import tempfile
 import os
 from google.cloud import texttospeech
+from streamlit_mic_recorder import mic_recorder
+
+import io
 
 
 # api for google cloud
@@ -80,20 +83,25 @@ if "chat" not in st.session_state:
 
 # --- Voice capture --------------------------------------------------------------------------
 def record_text():
-    reco = sr.Recognizer()
-    with sr.Microphone() as source:
-        st.info("Speak now...Listening............")
-        reco.adjust_for_ambient_noise(source, duration=0.3)
-        try:
-            audio = reco.listen(source, timeout=6, phrase_time_limit=6)
-            text = reco.recognize_google(audio)
-            st.success(f"Recognized: {text}")
-            return text
-        except sr.UnknownValueError:
-            st.error("Could not understand the audio.")
-        except sr.RequestError as e:
-            st.error(f"Speech recognition error: {e}")
-        return ""
+    st.markdown("### Click here to speak")
+    audio_bytes = mic_recorder(start_prompt="🎤 Start Recording", stop_prompt="🛑 Stop Recording", key="rec", use_container_width=True)
+
+    if audio_bytes:
+        st.audio(audio_bytes, format="audio/wav")
+
+        # Use SpeechRecognition to convert bytes to text
+        reco = sr.Recognizer()
+        with sr.AudioFile(io.BytesIO(audio_bytes)) as source:
+            audio = reco.record(source)
+            try:
+                text = reco.recognize_google(audio)
+                st.success(f"🗣️ Recognized: {text}")
+                return text
+            except sr.UnknownValueError:
+                st.error("Could not understand the audio.")
+            except sr.RequestError as e:
+                st.error(f"Speech recognition error: {e}")
+    return ""
 
 # --- Build prompt ---
 def build_prompt(user_question):
