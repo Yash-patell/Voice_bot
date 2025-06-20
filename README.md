@@ -1,6 +1,6 @@
-#  Voice Interview Bot – Home.LLC Assignment
+#  Voice Interview Bot 
 
-This is an AI-powered voice interview assistant that listens to your spoken questions, transcribes them, and responds like **Yash Patel**, a candidate applying for a remote AI role at **Home.LLC**. The bot uses:
+This is an AI-powered voice interview assistant that listens to your spoken questions, transcribes them, and responds like **Yash Patel**
 
 -  **Gemini API** (Generative AI from Google)
 -  **Google Cloud Text-to-Speech**
